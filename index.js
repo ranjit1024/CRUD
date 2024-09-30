@@ -1,5 +1,16 @@
-// const express = require("express");
-// const bsodyParser = require('body-parser');
-const adminRouter = require("./routes/user.js");
+const express = require("express");
+const bodyParser = require("body-parser");
+const adminRouter = require("./routes/admin");
+const userRouter = require("./routes/user");
+const env = require("dotenv").config({path:"./port.env"});
 
-console.log(adminRouter.getThings)
+const port = process.env.PORT || 3000;
+const app = express();
+
+app.use(bodyParser.json());
+app.use("/admin", adminRouter);
+app.use("/user", userRouter);
+
+app.listen(port, ()=>{
+    console.log(`listing on port numenbr ${port}`);
+})
