@@ -7,7 +7,9 @@ const env = require("dotenv").config({path:"./port.env"});
 const port = process.env.PORT || 3000;
 const app = express();
 
+
 app.use(bodyParser.json());
+
 app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 
