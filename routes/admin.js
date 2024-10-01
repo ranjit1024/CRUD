@@ -35,8 +35,12 @@ router.post('/course', adminMiddleware, async (req, res)=>{
     
 });
 
-router.get("/courses", adminMiddleware,(req, res)=>{
-    res.send("working");
+router.get("/courses", adminMiddleware,async (req, res)=>{
+   const response = await Course.find({});
+   res.json({
+    curses:response
+   })
 });
+
 module.exports = router;
 
