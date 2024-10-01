@@ -1,22 +1,33 @@
 
 const {Admin} = require("../db");
-console.log(Admin);
 
-function adminMiddleWare(req, res, next){
+
+async function adminMiddleWare(req, res, next){
     const username = req.headers.username;
     const password = req.headers.password;
-    Admin.findOne({
-        username:username,
-        password:password
-    }).then(function(value){
-        if(value){
-            next();
-        }else{
-            res.status(403).json({
-                msg:"admin does not exists"
-            })
-        }
-    })
+    console.log(username, password)
+    const findData = await Admin.findOne({username:username,password:password});
+    console.log(findData)
+    if(findData){
+        console.log("this is working");
+        next();
+    }
+    else{
+        res.status(403).json({
+            msg:"admin does not exists"
+        })
+    }
+    // .then(function(value){
+    //     if(value){
+    //         console.log(value)
+    //         next();
+    //     }else{
+    //         console.log(value)
+    //         res.status(403).json({
+    //             msg:"admin does not exists"
+    //         })
+    //     }
+    // })
 
 }
 module.exports = adminMiddleWare; 

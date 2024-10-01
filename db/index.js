@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://ranjit:iamranjit@cluster0.ehxzb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+const dataBase = mongoose.connect("mongodb+srv://ranjit:iamranjit@cluster0.ehxzb.mongodb.net/course?retryWrites=true&w=majority&appName=Cluster0");
+
 
 const AdminSchema = new mongoose.Schema({
     username:String,
@@ -17,7 +18,10 @@ const UserSchema = new mongoose.Schema({
 })
 
 const CourseSchema = new mongoose.Schema({
-
+    title:String,
+    desripition:String,
+    imageLink:String,
+    price:Number
 })
 
 const Admin = mongoose.model('Admin', AdminSchema);
