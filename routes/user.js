@@ -52,8 +52,10 @@ router.get("/purchesedCourses", userMidlleware,  async (req, res)=>{
             "$in":user.purchesdCourses
         }
     })
+
     res.json({
         course:course
     })
 });
 module.exports = router;
+

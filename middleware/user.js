@@ -1,16 +1,18 @@
-const {User} = require('../db');
+const jwt = require("jsonwebtoken");
+const secrect = require("../index.js");
 
-async function userMidlleware(req, res, next){
-    const username = req.headers.username;
-    const password = req.headers.password;
-
-    const findUserData = await User.findOne({username:username, password:password});
-    if(findUserData){
+function adminMiddleware(req, res, next){
+    const token = req.headers.authorization;
+    const words = token.split(" ");
+    const jwtToken = words[1];
+    const decodeValue = jwt.verify(jwtToken, secrect);
+    if(decodeValue.username){
         next();
-    }else{
-        res.status(403).json({
-            msg:"User does not exists"
+    }
+    else{
+        res.send(403).json({
+            msg:"You are not autorized to login as admin"
         })
     }
 }
-module.exports = userMidlleware;
+module.exports = adminMiddleware;
