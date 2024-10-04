@@ -1,4 +1,4 @@
-const secrect = require("../index");
+const secrect = "ranjit-server";
 const jwt = require("jsonwebtoken");
 
 function adminMiddleware(req, res, next){

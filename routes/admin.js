@@ -2,7 +2,7 @@ const express = require("express");
 const adminMiddleware = require("../middleware/admin");
 const { Admin,Course } = require("../db");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "ranjit-server"
+const JWT_SECRET = require('../index')
 
 const router = express.Router();
 console.log(JWT_SECRET);
